@@ -4,9 +4,9 @@ const Footer = () => {
     const getCurrentYear = () => { return new Date().getFullYear(); };
 
     return (
-        <div>
+        <footer className='text-center mt-5'>
             <p><small>Copyright &copy; {getCurrentYear()}</small></p>
-        </div>
+        </footer>
     );
 };
 
