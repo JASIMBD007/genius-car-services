@@ -37,11 +37,17 @@ const Register = () => {
             <h2 style={{ textAlign: 'center' }} className='text-primary'>Please Register</h2>
             <form onSubmit={handleRegister} >
                 <input type="text" name="name" id="" placeholder='Your Name' />
+
                 <input type="email" name="email" id="" placeholder='Your Email' required />
+
                 <input type="password" name="password" id="" placeholder='Your Password' required />
+
                 <input onClick={() => setAgree(!agree)} type="checkbox" name="terms" id="terms" />
-                <label className={agree ? 'text-primary' : 'text-danger'} htmlFor="terms">Accept Terms & Conditions</label>
-                <input className='w-50 d-block btn btn-primary mx-auto mt-2' type="submit" value="Register" />
+                {/* <label className={agree ? 'ps-2  text-primary' : 'ps-2 text-danger'} htmlFor="terms">Accept Terms & Conditions</label> */}
+
+                <label className={`ps-2 ${agree ? '' : 'text-danger'}`} htmlFor="terms">Accept Terms & Conditions</label>
+
+                < input disabled={!agree} className='w-50 d-block btn btn-primary mx-auto mt-2' type="submit" value="Register" />
             </form>
             <p className='text-center'>Already have an account ? <Link to='/login' className='text-primary pe-auto text-decoration-none ' onClick={navigateLogin}>Please Login</Link> </p>
             <SocialLogin></SocialLogin>
