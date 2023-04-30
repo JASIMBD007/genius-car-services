@@ -13,14 +13,14 @@ const SocialLogin = () => {
     const navigate = useNavigate();
     let errorElement = '';
 
-    if (error) {
+    if (error || error1) {
         errorElement = <div>
-            <p className='text-danger'>Error: {error.message}</p>
+            <p className='text-danger'>Error: {error?.message} {error1?.message}</p>
         </div>
 
     }
 
-    if (user) {
+    if (user || user1) {
         navigate('/home');
     }
     return (
@@ -34,7 +34,7 @@ const SocialLogin = () => {
             <div>
                 <button onClick={() => signInWithGoogle()} className='btn btn-primary w-50 d-block mx-auto my-2'> <img style={{ width: "30px " }} src={google} alt="" srcset="" /> <span className='px-2'>Sign In With Google </span> </button>
                 <button className='btn btn-primary w-50 d-block mx-auto my-2'> <img style={{ width: "30px " }} src={facebook} alt="" srcset="" /> <span className='px-2'>Sign In With Facebook </span> </button>
-                <button className='btn btn-primary w-50 d-block mx-auto my-2'> <img style={{ width: "30px " }} src={github} alt="" srcset="" /> <span className='px-2'>Sign In With Github </span> </button>
+                <button onClick={() => signInWithGithub()} className='btn btn-primary w-50 d-block mx-auto my-2'> <img style={{ width: "30px " }} src={github} alt="" srcset="" /> <span className='px-2'>Sign In With Github </span> </button>
             </div>
         </div>
     );

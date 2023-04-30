@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Register.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -7,6 +7,7 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 
 
 const Register = () => {
+    const [agree, setAgree] = useState(false);
     const [
         createUserWithEmailAndPassword, user
     ] = useCreateUserWithEmailAndPassword(auth);
@@ -15,6 +16,7 @@ const Register = () => {
     const navigateLogin = () => {
         navigate('/login');
     };
+
     if (user) {
         navigate('/home');
     }
@@ -24,7 +26,11 @@ const Register = () => {
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
-        createUserWithEmailAndPassword(email, password);
+        // const agree = event.target.terms.checked;
+
+        if (agree) {
+            createUserWithEmailAndPassword(email, password);
+        }
     }
     return (
         <div className='register-form'>
@@ -33,9 +39,11 @@ const Register = () => {
                 <input type="text" name="name" id="" placeholder='Your Name' />
                 <input type="email" name="email" id="" placeholder='Your Email' required />
                 <input type="password" name="password" id="" placeholder='Your Password' required />
-                <input type="submit" value="Register" />
+                <input onClick={() => setAgree(!agree)} type="checkbox" name="terms" id="terms" />
+                <label className={agree ? 'text-primary' : 'text-danger'} htmlFor="terms">Accept Terms & Conditions</label>
+                <input className='w-50 d-block btn btn-primary mx-auto mt-2' type="submit" value="Register" />
             </form>
-            <p>Already have an account ? <Link to='/login' className='text-danger pe-auto text-decoration-none ' onClick={navigateLogin}>Please Login</Link> </p>
+            <p className='text-center'>Already have an account ? <Link to='/login' className='text-primary pe-auto text-decoration-none ' onClick={navigateLogin}>Please Login</Link> </p>
             <SocialLogin></SocialLogin>
         </div>
     );
