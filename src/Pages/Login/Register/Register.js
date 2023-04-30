@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Register.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import SocialLogin from '../SocialLogin/SocialLogin';
 
@@ -10,7 +10,8 @@ const Register = () => {
     const [agree, setAgree] = useState(false);
     const [
         createUserWithEmailAndPassword, user
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const navigate = useNavigate();
 
     const navigateLogin = () => {
@@ -18,19 +19,20 @@ const Register = () => {
     };
 
     if (user) {
-        navigate('/home');
+        console.log('user', user)
     }
 
-    const handleRegister = event => {
+    const handleRegister = async (event) => {
         event.preventDefault();
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
         // const agree = event.target.terms.checked;
 
-        if (agree) {
-            createUserWithEmailAndPassword(email, password);
-        }
+        await createUserWithEmailAndPassword(email, password);
+        await updateProfile({ displayName: name });
+        console.log('Updated profile');
+        navigate('/home');
     }
     return (
         <div className='register-form'>
@@ -47,7 +49,7 @@ const Register = () => {
 
                 <label className={`ps-2 ${agree ? '' : 'text-danger'}`} htmlFor="terms">Accept Terms & Conditions</label>
 
-                < input disabled={!agree} className='w-50 d-block btn btn-primary mx-auto mt-2' type="submit" value="Register" />
+                <input disabled={!agree} className='w-50 d-block btn btn-primary mx-auto mt-2' type="submit" value="Register" />
             </form>
             <p className='text-center'>Already have an account ? <Link to='/login' className='text-primary pe-auto text-decoration-none ' onClick={navigateLogin}>Please Login</Link> </p>
             <SocialLogin></SocialLogin>
