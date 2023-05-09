@@ -6,11 +6,15 @@ const Footer = () => {
     const year = today.getFullYear();
 
     return (
+        <div className="wrapper">
 
-        <footer className='text-center text-white mt-5 bg-primary p-2'>
-            <p><small>Copyright &copy; {year}</small></p>
-        </footer>
+            <div className="footer text-center text-white mt-5 bg-primary p-2 " >
+                <p><small>Copyright &copy; {year}</small></p>
+            </div>
+
+        </div >
     );
+
 };
 
 export default Footer;
