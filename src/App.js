@@ -12,6 +12,7 @@ import Register from './Pages/Login/Register/Register';
 import Checkout from './Pages/Checkout/Checkout/Checkout';
 import ProtectedRoute from './Pages/Login/ProtectedRoute/ProtectedRoute';
 import AddService from './Pages/AddService/AddService';
+import ManageServices from './Pages/ManageServices/ManageServices';
 
 function App () {
   return (
@@ -32,6 +33,11 @@ function App () {
         <Route path='/addservice' element={
           <ProtectedRoute>
             <AddService />
+          </ProtectedRoute>
+        } />
+        <Route path='/manageservices' element={
+          <ProtectedRoute>
+            <ManageServices />
           </ProtectedRoute>
         } />
         <Route path='*' element={<NotFound />} />
