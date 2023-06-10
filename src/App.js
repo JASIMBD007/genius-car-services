@@ -11,6 +11,7 @@ import Login from './Pages/Login/Login/Login';
 import Register from './Pages/Login/Register/Register';
 import Checkout from './Pages/Checkout/Checkout/Checkout';
 import ProtectedRoute from './Pages/Login/ProtectedRoute/ProtectedRoute';
+import AddService from './Pages/AddService/AddService';
 
 function App () {
   return (
@@ -26,6 +27,11 @@ function App () {
         <Route path='/checkout' element={
           <ProtectedRoute>
             <Checkout />
+          </ProtectedRoute>
+        } />
+        <Route path='/addservice' element={
+          <ProtectedRoute>
+            <AddService />
           </ProtectedRoute>
         } />
         <Route path='*' element={<NotFound />} />
