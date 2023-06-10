@@ -35,7 +35,7 @@ function App () {
             <AddService />
           </ProtectedRoute>
         } />
-        <Route path='/manageservices' element={
+        <Route path='/manage' element={
           <ProtectedRoute>
             <ManageServices />
           </ProtectedRoute>
