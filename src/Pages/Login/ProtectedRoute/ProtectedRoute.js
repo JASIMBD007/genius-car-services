@@ -13,8 +13,8 @@ const ProtectedRoute = ({ children }) => {
     if (loading) {
         return <Loading></Loading>
     }
-
-    if (!user) {
+    console.log(user);
+    if (user.providerData[0]?.providerId === 'password' && !user) {
         return <Navigate to='/login' state={{ from: location }} replace />
     }
 
