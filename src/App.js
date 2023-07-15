@@ -13,6 +13,7 @@ import Checkout from './Pages/Checkout/Checkout/Checkout';
 import ProtectedRoute from './Pages/Login/ProtectedRoute/ProtectedRoute';
 import AddService from './Pages/AddService/AddService';
 import ManageServices from './Pages/ManageServices/ManageServices';
+import { ToastContainer } from 'react-toastify';
 
 function App () {
   return (
@@ -43,6 +44,8 @@ function App () {
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer></Footer>
+      <ToastContainer />
+
     </div>
   );
 }

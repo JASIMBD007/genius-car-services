@@ -4,6 +4,7 @@ import useServiceDetail from '../../../hooks/useServiceDetail';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Checkout = () => {
     const { serviceId } = useParams();
@@ -34,9 +35,15 @@ const Checkout = () => {
             address: event.target.address.value,
             phone: event.target.phone.value
         }
+
         axios.post('http://localhost:5000/order', order)
             .then(response => {
-                console.log(response);
+                // console.log(response);
+                const { data } = response;
+                if (data.insertedId) {
+                    toast('Your order has placed!!!');
+                    event.target.reset();
+                }
             })
 
     }
@@ -44,9 +51,9 @@ const Checkout = () => {
         <div className='w-50 mx-auto'>
             <h2>Please Order : {service.name}</h2>
             <form onSubmit={handlePlaceOrder}>
-                <input className='w-100 mb-2' type="text" value={user.displayName} name="name" placeholder='Name' required readOnly />
+                <input className='w-100 mb-2' type="text" value={user?.displayName} name="name" placeholder='Name' required readOnly />
                 <br />
-                <input className='w-100 mb-2' type="email" value={user.email} name="email" placeholder='Email' required readOnly disabled />
+                <input className='w-100 mb-2' type="email" value={user?.email} name="email" placeholder='Email' required readOnly disabled />
                 <br />
                 <input className='w-100 mb-2' type="text" value={service.name} name="service" placeholder='Service' required readOnly />
                 <br />
