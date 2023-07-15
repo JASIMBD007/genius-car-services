@@ -14,6 +14,7 @@ import ProtectedRoute from './Pages/Login/ProtectedRoute/ProtectedRoute';
 import AddService from './Pages/AddService/AddService';
 import ManageServices from './Pages/ManageServices/ManageServices';
 import { ToastContainer } from 'react-toastify';
+import Orders from './Pages/Orders/Orders';
 
 function App () {
   return (
@@ -39,6 +40,11 @@ function App () {
         <Route path='/manage' element={
           <ProtectedRoute>
             <ManageServices />
+          </ProtectedRoute>
+        } />
+        <Route path='/orders' element={
+          <ProtectedRoute>
+            <Orders />
           </ProtectedRoute>
         } />
         <Route path='*' element={<NotFound />} />
